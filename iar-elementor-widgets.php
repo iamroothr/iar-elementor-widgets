@@ -3,7 +3,7 @@
  * Plugin Name: IAR Elementor Widgets
  * Plugin URI: https://iamroot.agency
  * Description: IAR Custom Elementor widgets.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Drazen Biljak
  * Author URI: https://iamroot.agency
  * License: GPL2+
@@ -15,7 +15,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 require_once 'vendor/autoload.php';
 
-define( 'IAR_ELEMENTOR_WIDGETS_VERSION', '1.0.0' );
+define( 'IAR_ELEMENTOR_WIDGETS_VERSION', '1.0.1' );
 define( 'IAR_ELEMENTOR_WIDGETS_SLUG', 'iar-elementor-widgets' );
 define( 'IAR_ELEMENTOR_WIDGETS_TITLE', 'Elementor Widgets by I am Root' );
 define( 'IAR_ELEMENTOR_WIDGETS_URL', plugin_dir_url( __FILE__ ) );
