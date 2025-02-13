@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.arsenal-regular {
+    font-family: "Arsenal", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.arsenal-bold {
+    font-family: "Arsenal", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.arsenal-regular-italic {
+    font-family: "Arsenal", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.arsenal-bold-italic {
+    font-family: "Arsenal", serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.iar-image-grid {
+    display: grid;
+    width: 100%;
+    height: 400px;
+    gap: 20px;
+}
+
+.iar-image-grid__number-1 {
+    grid-template-columns: 1fr;
+}
+
+.iar-image-grid__number-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+.iar-image-grid__number-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.iar-image-grid__number-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.iar-image-grid__number-4 .iar-image-grid__item:nth-child(1) {
+    grid-area: 1 / 1 / 3 / 3;
+}
+
+.iar-image-grid__number-4 .iar-image-grid__item:nth-child(2) {
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.iar-image-grid__number-4 .iar-image-grid__item:nth-child(3) {
+    grid-area: 1 / 4 / 2 / 5;
+}
+
+.iar-image-grid__number-4 .iar-image-grid__item:nth-child(4) {
+    grid-area: 2 / 3 / 3 / 5;
+}
+
+.iar-image-grid__item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+}
+
+.iar-image-grid__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.iar-image-grid__item:hover::before {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.iar-image-grid__content {
+    position: absolute;
+    z-index: 2;
+    text-align: left;
+    padding: 20px;
+    color: #fff;
+    left: 0;
+    bottom: 0;
+}
+
+.iar-image-grid__title {
+    color: #FFFFFF;
+    font-size: 35px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    line-height: 1.16666;
+    margin-bottom: 0;
+}
+
+.iar-image-grid__subtitle {
+    color: #FFFFFF;
+    font-family: "Arsenal", sans-serif;
+    font-size: 39px;
+    font-weight: 400;
+    line-height: 1.16666;
+    margin-bottom: 4px;
+}
+
+.iar-image-grid__button,
+.iar-image-grid__button.alt {
+    background-color: #f6dc31;
+    color: #383838;
+}
+.iar-image-grid__button {
+    line-height: 30px;
+    padding: 10px 35px;
+    border: 0;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    margin-top: 37px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.iar-image-grid__button:hover {
+    opacity: .7;
+}
+
+.iar-image-grid__button::after {
+    content: "\e992";
+    font-family: "roadthemes-icon";
+    font-weight: 400;
+    margin-left: 10px;
+    font-size: 1.7rem;
+    display: inline-block;
+    vertical-align: top;
+    line-height: inherit;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    .iar-image-grid__number-2,
+    .iar-image-grid__number-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .iar-image-grid__number-4 {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .iar-image-grid__number-4 .iar-image-grid__item:nth-child(1) {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    .iar-image-grid__number-4 .iar-image-grid__item:nth-child(2) {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+
+    .iar-image-grid__number-4 .iar-image-grid__item:nth-child(3) {
+        grid-area: 3 / 1 / 4 / 2;
+    }
+
+    .iar-image-grid__number-4 .iar-image-grid__item:nth-child(4) {
+        grid-area: 4 / 1 / 5 / 2;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .iar-image-grid__number-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .iar-image-grid__number-3 .iar-image-grid__item:last-child {
+        grid-column: span 2;
+    }
+}

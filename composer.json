@@ -1,0 +1,17 @@
+{
+  "name": "dbiljak/iar-elementor-widgets",
+  "description": "Elementor Widgets by I am Root",
+  "version": "1.0.0",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Drazen Biljak",
+      "email": "hello@iamroot.agency"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "IarElementorWidgets\\": ["app/"]
+    }
+  }
+}

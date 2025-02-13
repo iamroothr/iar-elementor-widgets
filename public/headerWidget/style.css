@@ -1,0 +1,81 @@
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./resources/styles/header-widget/style.scss ***!
+  \************************************************************************************************************************************/
+.iar-custom-header {
+  width: 100vw !important;
+  left: 50% !important;
+  margin-left: -50vw !important;
+  position: relative !important;
+  max-width: 100vw !important;
+  right: auto !important;
+}
+.iar-custom-header__background {
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.iar-custom-header__background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.iar-custom-header__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 1;
+  max-width: 100%;
+  padding: 20px;
+  width: 1350px;
+}
+.iar-custom-header__title {
+  font-size: 6.4rem;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 2px 2px 6px #000;
+  line-height: 1.143;
+  margin-top: 11px;
+}
+.iar-custom-header__button {
+  background-color: #f6dc31;
+  color: #383838;
+  line-height: 30px;
+  padding: 10px 35px;
+  border: 0;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  margin-top: 37px;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.iar-custom-header__button:hover {
+  opacity: 0.7;
+}
+.iar-custom-header__button::after {
+  content: "\e992";
+  font-family: "roadthemes-icon";
+  font-weight: 400;
+  margin-left: 10px;
+  font-size: 1.7rem;
+  display: inline-block;
+  vertical-align: top;
+  line-height: inherit;
+}
+.iar-custom-header__subtitle {
+  font-size: 1.8rem;
+  line-height: 1.3;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 2px 2px 6px #000;
+}
