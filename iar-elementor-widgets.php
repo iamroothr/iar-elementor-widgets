@@ -27,16 +27,20 @@ define( 'API_NAMESPACE', 'iar-elementor-widgets/v1' );
 define( 'GITHUB_REPO_URL', 'https://github.com/iamroothr/iar-elementor-widgets' );
 define( 'GITHUB_REPO_PROD_BRANCH', 'main' );
 
-$files = [ 'config', 'setup', 'ajax', 'widgets' ];
+add_action( 'init', function (): void {
+    load_plugin_textdomain( 'iar-elementor-widgets', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+} );
+
+$files = [ 'config', 'setup', 'widgets' ];
 
 foreach ( $files as $file ) {
 	$file_path = IAR_ELEMENTOR_WIDGETS_PATH . "app/{$file}.php";
 
-	if ( ! $file_path ) {
-		wp_die(
-			sprintf( __( 'Error locating <code>%s</code> for inclusion.', 'sage' ), "app/{$file}.php" )
-		);
-	}
+    if ( ! file_exists( $file_path ) ) {
+        wp_die(
+            sprintf( __( 'Error locating <code>%s</code> for inclusion.', 'iar-elementor-widgets' ), "app/{$file}.php" )
+        );
+    }
 
 	require_once $file_path;
 }

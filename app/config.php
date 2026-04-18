@@ -29,10 +29,3 @@ function get_language_suffix(): string {
 
 	return $suffix;
 }
-
-add_filter( 'plugin_action_links_' . IAR_ELEMENTOR_WIDGETS_BASENAME, function ( array $links ): array {
-	$settings_link = 'edit.php?post_type=iar-booking&page=' . IAR_ELEMENTOR_WIDGETS_SLUG;
-	$links[]       = sprintf( '<a href="%s-settings">Settings</a>', $settings_link );
-
-	return $links;
-}, 10, 1 );

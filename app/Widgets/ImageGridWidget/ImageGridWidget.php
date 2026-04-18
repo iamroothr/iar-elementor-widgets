@@ -12,13 +12,13 @@ use Elementor\Utils;
 use Elementor\Widget_Base;
 
 class ImageGridWidget extends Widget_Base {
-	public function get_name(): string {
-		return 'iar_image_grid';
-	}
+    public function get_name(): string {
+        return 'iar_image_grid';
+    }
 
-	public function get_title(): string {
-		return __( 'Image Grid', 'iar_image_grid' );
-	}
+    public function get_title(): string {
+        return __( 'Image Grid', 'iar-elementor-widgets' );
+    }
 
 	public function get_icon(): string {
 		return 'eicon-gallery-grid';
@@ -32,20 +32,21 @@ class ImageGridWidget extends Widget_Base {
 		return [ 'iar-image-grid-widget' ];
 	}
 
-	public function __construct( $data = [], $args = null ) {
-		parent::__construct( $data, $args );
+    public function __construct( $data = [], $args = null ) {
+        parent::__construct( $data, $args );
 
-		wp_register_style( 'iar-image-grid-widget', IAR_ELEMENTOR_WIDGETS_URL . 'public/imageGridWidget/style.css', [], '1.0.0' );
-	}
+        // Register the widget stylesheet with the plugin version constant instead of a hardcoded string.
+        wp_register_style( 'iar-image-grid-widget', IAR_ELEMENTOR_WIDGETS_URL . 'public/imageGridWidget/style.css', [], IAR_ELEMENTOR_WIDGETS_VERSION );
+    }
 
 	protected function register_controls(): void {
 		$this->start_controls_section( 'layout_section', [
-            'label' => __( 'Layout', 'iar_image_grid' ),
+            'label' => __( 'Layout', 'iar-elementor-widgets' ),
             'tab'   => Controls_Manager::TAB_CONTENT,
         ] );
 
 		$this->add_responsive_control( 'grid_height', [
-            'label'      => __( 'Grid Height', 'iar_image_grid' ),
+            'label'      => __( 'Grid Height', 'iar-elementor-widgets' ),
             'type'       => Controls_Manager::SLIDER,
             'size_units' => [ 'px', 'vh' ],
             'range'      => [
@@ -70,7 +71,7 @@ class ImageGridWidget extends Widget_Base {
         ] );
 
 		$this->add_responsive_control( 'grid_gap', [
-            'label'      => __( 'Grid Gap', 'iar_image_grid' ),
+            'label'      => __( 'Grid Gap', 'iar-elementor-widgets' ),
             'type'       => Controls_Manager::SLIDER,
             'size_units' => [ 'px' ],
             'range'      => [
@@ -92,14 +93,14 @@ class ImageGridWidget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'items_section', [
-            'label' => __( 'Grid Items', 'iar_image_grid' ),
+            'label' => __( 'Grid Items', 'iar-elementor-widgets' ),
             'tab'   => Controls_Manager::TAB_CONTENT,
         ] );
 
 		$repeater = new Repeater();
 
 		$repeater->add_control( 'background_image', [
-            'label'   => __( 'Background Image', 'iar_image_grid' ),
+            'label'   => __( 'Background Image', 'iar-elementor-widgets' ),
             'type'    => Controls_Manager::MEDIA,
             'default' => [
                 'url' => Utils::get_placeholder_image_src(),
@@ -107,40 +108,40 @@ class ImageGridWidget extends Widget_Base {
         ] );
 
 		$repeater->add_control( 'title', [
-            'label'   => __( 'Title', 'iar_image_grid' ),
+            'label'   => __( 'Title', 'iar-elementor-widgets' ),
             'type'    => Controls_Manager::TEXT,
-            'default' => __( 'Grid Item Title', 'iar_image_grid' ),
+            'default' => __( 'Grid Item Title', 'iar-elementor-widgets' ),
         ] );
 
 		$repeater->add_control( 'subtitle', [
-            'label'   => __( 'Subtitle', 'iar_image_grid' ),
+            'label'   => __( 'Subtitle', 'iar-elementor-widgets' ),
             'type'    => Controls_Manager::TEXT,
-            'default' => __( 'Grid Item Subtitle', 'iar_image_grid' ),
+            'default' => __( 'Grid Item Subtitle', 'iar-elementor-widgets' ),
         ] );
 
 		$repeater->add_control( 'link', [
-            'label'       => __( 'Link', 'iar_image_grid' ),
+            'label'       => __( 'Link', 'iar-elementor-widgets' ),
             'type'        => Controls_Manager::URL,
-            'placeholder' => __( 'https://example.com', 'iar_image_grid' ),
+            'placeholder' => __( 'https://example.com', 'iar-elementor-widgets' ),
             'default'     => [
                 'url' => '#',
             ],
         ] );
 
 		$repeater->add_control( 'link_label', [
-            'label'   => __( 'Link Label', 'iar_image_grid' ),
+            'label'   => __( 'Link Label', 'iar-elementor-widgets' ),
             'type'    => Controls_Manager::TEXT,
-            'default' => __( 'Open', 'iar_image_grid' ),
+            'default' => __( 'Open', 'iar-elementor-widgets' ),
         ] );
 
 		$this->add_control( 'grid_items', [
-            'label'       => __( 'Grid Items', 'iar_image_grid' ),
+            'label'       => __( 'Grid Items', 'iar-elementor-widgets' ),
             'type'        => Controls_Manager::REPEATER,
             'fields'      => $repeater->get_controls(),
             'default'     => [
                 [
-                    'title'    => __( 'Item #1', 'iar_image_grid' ),
-                    'subtitle' => __( 'Subtitle #1', 'iar_image_grid' ),
+                    'title'    => __( 'Item #1', 'iar-elementor-widgets' ),
+                    'subtitle' => __( 'Subtitle #1', 'iar-elementor-widgets' ),
                 ],
             ],
             'title_field' => '{{{ title }}}',
@@ -149,12 +150,12 @@ class ImageGridWidget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'style_section', [
-            'label' => __( 'Style', 'iar_image_grid' ),
+            'label' => __( 'Style', 'iar-elementor-widgets' ),
             'tab'   => Controls_Manager::TAB_STYLE,
         ] );
 
 		$this->add_control( 'title_color', [
-            'label'     => __( 'Title Color', 'iar_image_grid' ),
+            'label'     => __( 'Title Color', 'iar-elementor-widgets' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#ffffff',
             'selectors' => [
@@ -163,7 +164,7 @@ class ImageGridWidget extends Widget_Base {
         ] );
 
 		$this->add_control( 'subtitle_color', [
-            'label'     => __( 'Subtitle Color', 'iar_image_grid' ),
+            'label'     => __( 'Subtitle Color', 'iar-elementor-widgets' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '#ffffff',
             'selectors' => [

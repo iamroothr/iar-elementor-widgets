@@ -8,17 +8,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'elementor/elements/categories_registered', function ( $elements_manager ) {
-	$elements_manager->add_category( 'iar-widgets', [
-		'title' => esc_html__( 'I am root', 'iar-elementor' ),
-		'icon'  => 'fa fa-plug',
-	] );
+    $elements_manager->add_category( 'iar-widgets', [
+        'title' => esc_html__( 'I am root', 'iar-elementor-widgets' ),
+        'icon'  => 'fa fa-plug',
+    ] );
 } );
 
 add_action( 'plugins_loaded', function (): void {
 	if ( ! did_action( 'elementor/loaded' ) ) {
 		add_action( 'admin_notices', function () {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'IAR Elementor Image Grid plugin requires Elementor to be installed and active.', 'iar_image_grid' ) . '</p></div>';
-		} );
+            echo '<div class="notice notice-error"><p>' . esc_html__( 'IAR Elementor Image Grid plugin requires Elementor to be installed and active.', 'iar-elementor-widgets' ) . '</p></div>';
+        } );
 
 		return;
 	}

@@ -57,18 +57,20 @@ class ViewFinder {
 		return '';
 	}
 
-	private function iar_render_internal( string $_view_file_, array $_data_ = null ): void {
-		if ( $_data_ !== null ) {
-			extract( $_data_ );
-		}
+    private function iar_render_internal( string $_view_file_, array $_data_ = null ): void {
+        if ( $_data_ !== null ) {
+            // Use EXTR_SKIP to avoid overwriting existing variables in the local scope
+            extract( $_data_, EXTR_SKIP );
+        }
 
 		require $_view_file_;
 	}
 
-	private function iar_get_internal( $_view_file_, array $_data_ = null ) {
-		if ( $_data_ !== null ) {
-			extract( $_data_, EXTR_OVERWRITE );
-		}
+    private function iar_get_internal( $_view_file_, array $_data_ = null ) {
+        if ( $_data_ !== null ) {
+            // Use EXTR_SKIP here as well to prevent accidental variable overwrites
+            extract( $_data_, EXTR_SKIP );
+        }
 
 		ob_start();
 		ob_implicit_flush( 0 );
@@ -77,4 +79,3 @@ class ViewFinder {
 		return ob_get_clean();
 	}
 }
-

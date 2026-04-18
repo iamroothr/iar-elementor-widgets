@@ -12,13 +12,14 @@ use Elementor\Controls_Manager;
 
 class HeaderWidget extends Widget_Base {
 
-	public function get_name(): string {
-		return 'iar_custom_header';
-	}
+    public function get_name(): string {
+        // Keep the widget name identifier but unify the text domain elsewhere
+        return 'iar_custom_header';
+    }
 
-	public function get_title(): string {
-		return __( 'Custom Header', 'iar_custom_header' );
-	}
+    public function get_title(): string {
+        return __( 'Custom Header', 'iar-elementor-widgets' );
+    }
 
 	public function get_icon(): string {
 		return 'eicon-header';
@@ -32,20 +33,24 @@ class HeaderWidget extends Widget_Base {
 		return [ 'iar-header-widget' ];
 	}
 
-	public function __construct( $data = [], $args = null ) {
-		parent::__construct( $data, $args );
+    public function __construct( $data = [], $args = null ) {
+        parent::__construct( $data, $args );
 
-		wp_register_style( 'iar-header-widget', IAR_ELEMENTOR_WIDGETS_URL . 'public/headerWidget/style.css', [], '1.0.0' );
-	}
+        // Register the widget stylesheet with the plugin version constant instead of a hardcoded string.
+        wp_register_style( 'iar-header-widget', IAR_ELEMENTOR_WIDGETS_URL . 'public/headerWidget/style.css', [], IAR_ELEMENTOR_WIDGETS_VERSION );
+    }
 
-	protected function _register_controls(): void {
-		$this->start_controls_section( 'layout_section', [
-			'label' => __( 'Layout', 'iar_custom_header' ),
-			'tab'   => Controls_Manager::TAB_CONTENT,
-		] );
+    /**
+     * Register widget controls.
+     */
+    protected function register_controls(): void {
+        $this->start_controls_section( 'layout_section', [
+            'label' => __( 'Layout', 'iar-elementor-widgets' ),
+            'tab'   => Controls_Manager::TAB_CONTENT,
+        ] );
 
 		$this->add_responsive_control( 'header_height', [
-			'label'      => __( 'Header Height', 'iar_custom_header' ),
+            'label'      => __( 'Header Height', 'iar-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vh' ],
 			'range'      => [
@@ -72,12 +77,12 @@ class HeaderWidget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'background_section', [
-			'label' => __( 'Background', 'iar_custom_header' ),
+            'label' => __( 'Background', 'iar-elementor-widgets' ),
 			'tab'   => Controls_Manager::TAB_CONTENT,
 		] );
 
 		$this->add_control( 'background_image', [
-			'label'   => __( 'Background Image', 'iar_custom_header' ),
+            'label'   => __( 'Background Image', 'iar-elementor-widgets' ),
 			'type'    => Controls_Manager::MEDIA,
 			'default' => [
 				'url' => Utils::get_placeholder_image_src(),
@@ -86,25 +91,27 @@ class HeaderWidget extends Widget_Base {
 
 		$this->end_controls_section();
 
-		$this->start_controls_section( 'layout_section', [
-			'label' => __( 'Layout', 'iar_custom_header' ),
-			'tab'   => Controls_Manager::TAB_CONTENT,
-		] );
+        // Use a unique section ID for alignment to avoid duplicate IDs.
+        $this->start_controls_section( 'alignment_section', [
+            // Change label from 'Layout' to 'Alignment' for clarity in the editor UI.
+            'label' => __( 'Alignment', 'iar-elementor-widgets' ),
+            'tab'   => Controls_Manager::TAB_CONTENT,
+        ] );
 
 		$this->add_control( 'content_alignment', [
-			'label'   => __( 'Content Alignment', 'iar_custom_header' ),
+            'label'   => __( 'Content Alignment', 'iar-elementor-widgets' ),
 			'type'    => Controls_Manager::CHOOSE,
 			'options' => [
 				'left'   => [
-					'title' => __( 'Left', 'iar_custom_header' ),
+                    'title' => __( 'Left', 'iar-elementor-widgets' ),
 					'icon'  => 'eicon-text-align-left',
 				],
 				'center' => [
-					'title' => __( 'Center', 'iar_custom_header' ),
+                    'title' => __( 'Center', 'iar-elementor-widgets' ),
 					'icon'  => 'eicon-text-align-center',
 				],
 				'right'  => [
-					'title' => __( 'Right', 'iar_custom_header' ),
+                    'title' => __( 'Right', 'iar-elementor-widgets' ),
 					'icon'  => 'eicon-text-align-right',
 				],
 			],
@@ -115,44 +122,44 @@ class HeaderWidget extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'content_section', [
-			'label' => __( 'Content', 'iar_custom_header' ),
+            'label' => __( 'Content', 'iar-elementor-widgets' ),
 			'tab'   => Controls_Manager::TAB_CONTENT,
 		] );
 
 		$this->add_control( 'subtitle', [
-			'label'     => __( 'Subtitle', 'iar_custom_header' ),
-			'type'      => Controls_Manager::TEXTAREA,
-			'default'   => __( 'Your Subtitle Here', 'iar_custom_header' ),
+            'label'     => __( 'Subtitle', 'iar-elementor-widgets' ),
+            'type'      => Controls_Manager::TEXTAREA,
+            'default'   => __( 'Your Subtitle Here', 'iar-elementor-widgets' ),
 			'rows'      => 4,
 			'separator' => 'before',
 		] );
 
 		$this->add_control( 'title', [
-			'label'     => __( 'Title', 'iar_custom_header' ),
-			'type'      => Controls_Manager::TEXTAREA,
-			'default'   => __( 'Your Header Title', 'iar_custom_header' ),
+            'label'     => __( 'Title', 'iar-elementor-widgets' ),
+            'type'      => Controls_Manager::TEXTAREA,
+            'default'   => __( 'Your Header Title', 'iar-elementor-widgets' ),
 			'rows'      => 4,
 			'separator' => 'before',
 		] );
 
 		$this->add_control( 'button_text', [
-			'label'   => __( 'Button Text', 'iar_custom_header' ),
-			'type'    => Controls_Manager::TEXT,
-			'default' => __( 'Learn More', 'iar_custom_header' ),
+            'label'   => __( 'Button Text', 'iar-elementor-widgets' ),
+            'type'    => Controls_Manager::TEXT,
+            'default' => __( 'Learn More', 'iar-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'button_link_type', [
-			'label'   => __( 'Link Type', 'iar_custom_header' ),
+            'label'   => __( 'Link Type', 'iar-elementor-widgets' ),
 			'type'    => Controls_Manager::SELECT,
 			'default' => 'custom',
 			'options' => [
-				'custom' => __( 'Custom URL', 'iar_custom_header' ),
-				'page'   => __( 'Page', 'iar_custom_header' ),
+                'custom' => __( 'Custom URL', 'iar-elementor-widgets' ),
+                'page'   => __( 'Page', 'iar-elementor-widgets' ),
 			],
 		] );
 
 		$this->add_control( 'button_link', [
-			'label'       => __( 'Link', 'iar_custom_header' ),
+            'label'       => __( 'Link', 'iar-elementor-widgets' ),
 			'type'        => Controls_Manager::URL,
 			'placeholder' => 'https://your-link.com',
 			'condition'   => [
@@ -164,7 +171,7 @@ class HeaderWidget extends Widget_Base {
 		] );
 
 		$this->add_control( 'button_page', [
-			'label'     => __( 'Select Page', 'iar_custom_header' ),
+            'label'     => __( 'Select Page', 'iar-elementor-widgets' ),
 			'type'      => Controls_Manager::SELECT2,
 			'options'   => $this->get_pages_list(),
 			'condition' => [
