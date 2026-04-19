@@ -21,6 +21,9 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-fade": "^8.6.0",
     "mini-css-extract-plugin": "^2.9.1"
   }
 }

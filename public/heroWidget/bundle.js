@@ -10,23 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/scripts/header-widget/app.js":
-/*!************************************************!*\
-  !*** ./resources/scripts/header-widget/app.js ***!
-  \************************************************/
+/***/ "./resources/scripts/hero-widget/app.js":
+/*!**********************************************!*\
+  !*** ./resources/scripts/hero-widget/app.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_header_widget_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../styles/header-widget/style.scss */ \"./resources/styles/header-widget/style.scss\");\n\n\n//# sourceURL=webpack://iar-elementor-widgets/./resources/scripts/header-widget/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_hero_widget_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../styles/hero-widget/style.scss */ \"./resources/styles/hero-widget/style.scss\");\n\n\n//# sourceURL=webpack://iar-elementor-widgets/./resources/scripts/hero-widget/app.js?");
 
 /***/ }),
 
-/***/ "./resources/styles/header-widget/style.scss":
-/*!***************************************************!*\
-  !*** ./resources/styles/header-widget/style.scss ***!
-  \***************************************************/
+/***/ "./resources/styles/hero-widget/style.scss":
+/*!*************************************************!*\
+  !*** ./resources/styles/hero-widget/style.scss ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://iar-elementor-widgets/./resources/styles/header-widget/style.scss?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://iar-elementor-widgets/./resources/styles/hero-widget/style.scss?");
 
 /***/ })
 
@@ -73,7 +73,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./resources/scripts/header-widget/app.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./resources/scripts/hero-widget/app.js");
 /******/ 	
 /******/ })()
 ;

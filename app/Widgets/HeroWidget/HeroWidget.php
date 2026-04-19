@@ -1,6 +1,6 @@
 <?php
 
-namespace IarElementorWidgets\Widgets\HeaderWidget;
+namespace IarElementorWidgets\Widgets\HeroWidget;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -9,20 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 
-class HeaderWidget extends Widget_Base {
+class HeroWidget extends Widget_Base {
 
     public function get_name(): string {
-        // Keep the widget name identifier but unify the text domain elsewhere
-        return 'iar_custom_header';
+        return 'iar_custom_hero';
     }
 
     public function get_title(): string {
-        return __( 'Custom Header', 'iar-elementor-widgets' );
+        return __( 'Custom Hero', 'iar-elementor-widgets' );
     }
 
 	public function get_icon(): string {
-		return 'eicon-header';
+		return 'eicon-banner';
 	}
 
 	public function get_categories(): array {
@@ -30,14 +30,14 @@ class HeaderWidget extends Widget_Base {
 	}
 
 	public function get_style_depends(): array {
-		return [ 'iar-header-widget' ];
+		return [ 'iar-hero-widget' ];
 	}
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
         // Register the widget stylesheet with the plugin version constant instead of a hardcoded string.
-        wp_register_style( 'iar-header-widget', IAR_ELEMENTOR_WIDGETS_URL . 'public/headerWidget/style.css', [], IAR_ELEMENTOR_WIDGETS_VERSION );
+        wp_register_style( 'iar-hero-widget', IAR_ELEMENTOR_WIDGETS_URL . 'public/heroWidget/style.css', [], IAR_ELEMENTOR_WIDGETS_VERSION );
     }
 
     /**
@@ -49,8 +49,8 @@ class HeaderWidget extends Widget_Base {
             'tab'   => Controls_Manager::TAB_CONTENT,
         ] );
 
-		$this->add_responsive_control( 'header_height', [
-            'label'      => __( 'Header Height', 'iar-elementor-widgets' ),
+		$this->add_responsive_control( 'hero_height', [
+            'label'      => __( 'Hero Height', 'iar-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vh' ],
 			'range'      => [
@@ -70,7 +70,7 @@ class HeaderWidget extends Widget_Base {
 				'size' => 60,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .iar-custom-header__background' => 'height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .iar-custom-hero__background' => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -137,7 +137,7 @@ class HeaderWidget extends Widget_Base {
 		$this->add_control( 'title', [
             'label'     => __( 'Title', 'iar-elementor-widgets' ),
             'type'      => Controls_Manager::TEXTAREA,
-            'default'   => __( 'Your Header Title', 'iar-elementor-widgets' ),
+            'default'   => __( 'Your Hero Title', 'iar-elementor-widgets' ),
 			'rows'      => 4,
 			'separator' => 'before',
 		] );
@@ -180,6 +180,55 @@ class HeaderWidget extends Widget_Base {
 		] );
 
 		$this->end_controls_section();
+
+		// --- Button Style Section ---
+		$this->start_controls_section( 'button_style_section', [
+			'label' => __( 'Button', 'iar-elementor-widgets' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'button_typography',
+			'selector' => '{{WRAPPER}} .elementor-button',
+		] );
+
+		$this->add_control( 'button_text_color', [
+			'label'     => __( 'Text Color', 'iar-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .elementor-button' => 'color: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'button_bg_color', [
+			'label'     => __( 'Background Color', 'iar-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};' ],
+		] );
+
+		$this->add_responsive_control( 'button_padding', [
+			'label'      => __( 'Padding', 'iar-elementor-widgets' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', 'em' ],
+			'selectors'  => [ '{{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+		] );
+
+		$this->add_control( 'button_border_radius', [
+			'label'      => __( 'Border Radius', 'iar-elementor-widgets' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%' ],
+			'selectors'  => [ '{{WRAPPER}} .elementor-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+		] );
+
+		$this->add_control( 'button_show_arrow', [
+			'label'        => __( 'Show Arrow Icon', 'iar-elementor-widgets' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'iar-elementor-widgets' ),
+			'label_off'    => __( 'No', 'iar-elementor-widgets' ),
+			'return_value' => 'yes',
+			'default'      => '',
+			'separator'    => 'before',
+		] );
+
+		$this->end_controls_section();
 	}
 
 	private function get_pages_list(): array {
@@ -194,6 +243,6 @@ class HeaderWidget extends Widget_Base {
 	}
 
 	protected function render(): void {
-		iar_render_view( 'header-widget.index', [ 'settings' => $this->get_settings_for_display() ] );
+		iar_render_view( 'hero-widget.index', [ 'settings' => $this->get_settings_for_display() ] );
 	}
 }

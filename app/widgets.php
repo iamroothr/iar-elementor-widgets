@@ -1,6 +1,7 @@
 <?php
 
-use IarElementorWidgets\Widgets\HeaderWidget\HeaderWidget;
+use IarElementorWidgets\Widgets\HeroWidget\HeroWidget;
+use IarElementorWidgets\Widgets\HeroSliderWidget\HeroSliderWidget;
 use IarElementorWidgets\Widgets\ImageGridWidget\ImageGridWidget;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,6 +26,7 @@ add_action( 'plugins_loaded', function (): void {
 
 	add_action( 'elementor/widgets/register', function ( $widgets_manager ): void {
 		$widgets_manager->register( new ImageGridWidget() );
-		$widgets_manager->register( new HeaderWidget() );
+		$widgets_manager->register( new HeroWidget() );
+		$widgets_manager->register( new HeroSliderWidget() );
 	} );
 } );

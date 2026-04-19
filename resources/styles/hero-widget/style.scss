@@ -1,4 +1,4 @@
-.iar-custom-header {
+.iar-custom-hero {
     width: 100vw !important;
     left: 50% !important;
     margin-left: -50vw !important;
@@ -47,33 +47,8 @@
     }
 
     &__button {
-        background-color: #f6dc31;
-        color: #383838;
-        line-height: 30px;
-        padding: 10px 35px;
-        border: 0;
-        display: inline-block;
-        vertical-align: top;
-        border-radius: 30px;
-        -webkit-border-radius: 30px;
         margin-top: 37px;
-        font-size: 1.3rem;
-        font-weight: 700;
-
-        &:hover {
-            opacity: .7;
-        }
-
-        &::after {
-            content: "\e992";
-            font-family: "roadthemes-icon";
-            font-weight: 400;
-            margin-left: 10px;
-            font-size: 1.7rem;
-            display: inline-block;
-            vertical-align: top;
-            line-height: inherit;
-        }
+        text-decoration: none;
     }
 
     &__subtitle {
@@ -83,4 +58,16 @@
         font-weight: 600;
         text-shadow: 2px 2px 6px #000;
     }
+}
+
+// Shared button arrow icon
+.iar-button--has-arrow::after {
+    content: "\e992";
+    font-family: "roadthemes-icon";
+    font-weight: 400;
+    margin-left: 10px;
+    font-size: 1.2em;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: inherit;
 }

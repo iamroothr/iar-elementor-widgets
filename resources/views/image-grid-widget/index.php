@@ -2,6 +2,7 @@
 /**
  * @var $count
  * @var $items
+ * @var $settings
  */
 ?>
 
@@ -25,8 +26,8 @@
 							<h3 class="iar-image-grid__title"><?php echo esc_html( $item['title'] ); ?></h3>
 						<?php endif; ?>
 
-						<?php if ( ! empty( $item['link_label'] ) ) : ?>
-							<div class="iar-image-grid__button"><?php echo esc_html( $item['link_label'] ); ?></div>
+                        <?php if ( ! empty( $item['link_label'] ) ) : ?>
+                            <div class="iar-image-grid__button elementor-button<?php echo ( $settings['button_show_arrow'] ?? '' ) === 'yes' ? ' iar-button--has-arrow' : ''; ?>"><?php echo esc_html( $item['link_label'] ); ?></div>
 						<?php endif; ?>
 					</div>
 				</a>

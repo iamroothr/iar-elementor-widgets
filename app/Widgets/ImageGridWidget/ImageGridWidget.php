@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use Elementor\Utils;
+use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 
 class ImageGridWidget extends Widget_Base {
@@ -173,6 +174,55 @@ class ImageGridWidget extends Widget_Base {
         ] );
 
 		$this->end_controls_section();
+
+		// --- Button Style Section ---
+		$this->start_controls_section( 'button_style_section', [
+			'label' => __( 'Button', 'iar-elementor-widgets' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'button_typography',
+			'selector' => '{{WRAPPER}} .elementor-button',
+		] );
+
+		$this->add_control( 'button_text_color', [
+			'label'     => __( 'Text Color', 'iar-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .elementor-button' => 'color: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'button_bg_color', [
+			'label'     => __( 'Background Color', 'iar-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};' ],
+		] );
+
+		$this->add_responsive_control( 'button_padding', [
+			'label'      => __( 'Padding', 'iar-elementor-widgets' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', 'em' ],
+			'selectors'  => [ '{{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+		] );
+
+		$this->add_control( 'button_border_radius', [
+			'label'      => __( 'Border Radius', 'iar-elementor-widgets' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%' ],
+			'selectors'  => [ '{{WRAPPER}} .elementor-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+		] );
+
+		$this->add_control( 'button_show_arrow', [
+			'label'        => __( 'Show Arrow Icon', 'iar-elementor-widgets' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'iar-elementor-widgets' ),
+			'label_off'    => __( 'No', 'iar-elementor-widgets' ),
+			'return_value' => 'yes',
+			'default'      => '',
+			'separator'    => 'before',
+		] );
+
+		$this->end_controls_section();
 	}
 
 	protected function render(): void {
@@ -184,6 +234,6 @@ class ImageGridWidget extends Widget_Base {
 			return;
 		}
 
-		iar_render_view( 'image-grid-widget.index', [ 'count' => $count, 'items' => $items ] );
+		iar_render_view( 'image-grid-widget.index', [ 'count' => $count, 'items' => $items, 'settings' => $settings ] );
 	}
 }

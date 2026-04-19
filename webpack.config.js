@@ -3,7 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        headerWidget: './resources/scripts/header-widget/app.js',
+        heroWidget: './resources/scripts/hero-widget/app.js',
+        heroSliderWidget: './resources/scripts/hero-slider-widget/app.js',
         imageGridWidget: './resources/scripts/image-grid-widget/app.js',
     },
     output: {
