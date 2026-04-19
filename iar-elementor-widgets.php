@@ -3,7 +3,7 @@
  * Plugin Name: IAR Elementor Widgets
  * Plugin URI: https://iamroot.agency
  * Description: IAR Custom Elementor widgets.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Drazen Biljak
  * Author URI: https://iamroot.agency
  * License: GPL2+
