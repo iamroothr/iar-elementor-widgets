@@ -1,6 +1,16 @@
 /*!*****************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./resources/styles/hero-slider-widget/style.scss ***!
   \*****************************************************************************************************************************************/
+.elementor-widget-iar_hero_slider {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.elementor-column > .elementor-widget-wrap:has(.elementor-widget-iar_hero_slider) {
+  padding: 0 !important;
+}
+
 .iar-hero-slider {
   width: 100vw !important;
   left: 50% !important;
@@ -20,9 +30,9 @@
   flex: 0 0 100%;
   min-width: 0;
   height: 100%;
-  background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
   position: relative;
 }
 .iar-hero-slider__slide::before {
@@ -64,28 +74,14 @@
   animation-delay: 0.8s;
 }
 .iar-hero-slider__title {
-  font-size: 4rem;
-  font-weight: 700;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
   line-height: 1.15;
   margin: 10px 0 0;
 }
-@media (min-width: 768px) {
-  .iar-hero-slider__title {
-    font-size: 6.4rem;
-  }
-}
 .iar-hero-slider__subtitle {
-  font-size: 1.4rem;
-  font-weight: 600;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
   line-height: 1.3;
   margin: 0;
-}
-@media (min-width: 768px) {
-  .iar-hero-slider__subtitle {
-    font-size: 1.8rem;
-  }
 }
 .iar-hero-slider__button {
   margin-top: 30px;
@@ -111,6 +107,11 @@
   border-radius: 50%;
   transition: background 0.3s ease;
 }
+@media (max-width: 767px) {
+  .iar-hero-slider__arrow {
+    display: none;
+  }
+}
 .iar-hero-slider__arrow:hover {
   background: rgba(255, 255, 255, 0.3) !important;
 }
@@ -132,8 +133,13 @@
   position: relative;
 }
 .iar-hero-slider--parallax .iar-hero-slider__slide {
-  background-size: 130% auto;
-  background-position: center center;
+  background-size: auto 130% !important;
+  background-position: center center !important;
+}
+@media (orientation: landscape) {
+  .iar-hero-slider--parallax .iar-hero-slider__slide {
+    background-size: 130% auto !important;
+  }
 }
 
 .iar-button--has-arrow::after {

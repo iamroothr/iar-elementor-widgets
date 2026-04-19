@@ -1,3 +1,21 @@
+.elementor-widget-iar_hero_slider {
+    // Remove widget-level margin/padding that Elementor may add
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+// Legacy column wrapper — remove default padding
+.elementor-column > .elementor-widget-wrap:has(.elementor-widget-iar_hero_slider) {
+    padding: 0 !important;
+}
+
+// Remove Elementor column/container padding when hero slider is present.
+// Legacy sections: Section > Column > Widget — column has default 10px padding.
+// Flexbox containers: Container > Widget.
+// (Placed at the top of the file so these rules are applied before the
+// .iar-hero-slider block that follows.)
+
 .iar-hero-slider {
     width: 100vw !important;
     left: 50% !important;
@@ -22,9 +40,14 @@
         flex: 0 0 100%;
         min-width: 0;
         height: 100%;
-        background-size: cover;
-        background-position: center;
         background-repeat: no-repeat;
+        // Fallbacks for background-size/position so that when Elementor's
+        // responsive controls don't emit tablet/mobile CSS (because user
+        // didn't change the value), the image still fills the slide.
+        // Elementor will output more specific rules that override these when
+        // users set responsive values in the editor.
+        background-size: cover;
+        background-position: center center;
         position: relative;
 
         // Dark overlay
@@ -79,27 +102,15 @@
     }
 
     &__title {
-        font-size: 4rem;
-        font-weight: 700;
         text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
         line-height: 1.15;
         margin: 10px 0 0;
-
-        @media (min-width: 768px) {
-            font-size: 6.4rem;
-        }
     }
 
     &__subtitle {
-        font-size: 1.4rem;
-        font-weight: 600;
         text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
         line-height: 1.3;
         margin: 0;
-
-        @media (min-width: 768px) {
-            font-size: 1.8rem;
-        }
     }
 
     &__button {
@@ -129,6 +140,12 @@
         color: #fff !important;
         border-radius: 50%;
         transition: background 0.3s ease;
+
+        // Hide navigation arrows on small (mobile) viewports to avoid
+        // obstructing content and because touch swiping is primary on mobile.
+        @media (max-width: 767px) {
+            display: none;
+        }
 
         &:hover {
             background: rgba(255, 255, 255, 0.3) !important;
@@ -162,11 +179,24 @@
             position: relative;
         }
     }
-
     // --- Parallax effect ---
+    // Use 130% width on landscape/wide viewports so JS has room to pan
+    // horizontally. On portrait/narrow viewports, switch to auto
+    // height-based sizing to ensure the image covers the full slide
+    // height. We still use !important to override Elementor's inline
+    // responsive background-size/position values when necessary.
     &--parallax .iar-hero-slider__slide {
-        background-size: 130% auto;
-        background-position: center center;
+        // Default to height-first sizing so portrait (mobile) viewports
+        // are guaranteed vertical coverage. This prevents grey bands
+        // above/below the image when the viewport is narrow and tall.
+        background-size: auto 130% !important;
+        background-position: center center !important;
+
+        @media (orientation: landscape) {
+            // Restore original behavior on wide/landscape viewports where
+            // horizontal panning is desired.
+            background-size: 130% auto !important;
+        }
     }
 }
 

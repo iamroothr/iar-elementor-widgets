@@ -93,9 +93,46 @@ class HeroSliderWidget extends Widget_Base {
 			],
 		] );
 
+		$this->add_responsive_control( 'slide_bg_size', [
+			'label'   => __( 'Background Size', 'iar-elementor-widgets' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'cover'   => __( 'Cover', 'iar-elementor-widgets' ),
+				'contain' => __( 'Contain', 'iar-elementor-widgets' ),
+				'auto'    => __( 'Auto', 'iar-elementor-widgets' ),
+			],
+			'default'   => 'cover',
+			'selectors' => [
+				'{{WRAPPER}} .iar-hero-slider__slide' => 'background-size: {{VALUE}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'slide_bg_position', [
+			'label'   => __( 'Background Position', 'iar-elementor-widgets' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'center center' => __( 'Center Center', 'iar-elementor-widgets' ),
+				'center top'    => __( 'Center Top', 'iar-elementor-widgets' ),
+				'center bottom' => __( 'Center Bottom', 'iar-elementor-widgets' ),
+				'left center'   => __( 'Left Center', 'iar-elementor-widgets' ),
+				'right center'  => __( 'Right Center', 'iar-elementor-widgets' ),
+                // Use horizontal-first ordering for CSS background-position values
+                // (Elementor outputs these directly into CSS). Labels remain the same.
+                'left top'      => __( 'Top Left', 'iar-elementor-widgets' ),
+                'right top'     => __( 'Top Right', 'iar-elementor-widgets' ),
+                'left bottom'   => __( 'Bottom Left', 'iar-elementor-widgets' ),
+                'right bottom'  => __( 'Bottom Right', 'iar-elementor-widgets' ),
+			],
+			'default'   => 'center center',
+			'selectors' => [
+				'{{WRAPPER}} .iar-hero-slider__slide' => 'background-position: {{VALUE}};',
+			],
+		] );
+
 		$this->add_control( 'content_alignment', [
-			'label'   => __( 'Content Alignment', 'iar-elementor-widgets' ),
-			'type'    => Controls_Manager::CHOOSE,
+			'label'     => __( 'Content Alignment', 'iar-elementor-widgets' ),
+			'type'      => Controls_Manager::CHOOSE,
+			'separator' => 'before',
 			'options' => [
 				'left'   => [ 'title' => __( 'Left', 'iar-elementor-widgets' ), 'icon' => 'eicon-text-align-left' ],
 				'center' => [ 'title' => __( 'Center', 'iar-elementor-widgets' ), 'icon' => 'eicon-text-align-center' ],
@@ -282,6 +319,18 @@ class HeroSliderWidget extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [ '{{WRAPPER}} .iar-hero-slider__subtitle' => 'color: {{VALUE}};' ],
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'title_typography',
+			'label'    => __( 'Title Typography', 'iar-elementor-widgets' ),
+			'selector' => '{{WRAPPER}} .iar-hero-slider__title',
+		] );
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'subtitle_typography',
+			'label'    => __( 'Subtitle Typography', 'iar-elementor-widgets' ),
+			'selector' => '{{WRAPPER}} .iar-hero-slider__subtitle',
 		] );
 
 		$this->end_controls_section();
