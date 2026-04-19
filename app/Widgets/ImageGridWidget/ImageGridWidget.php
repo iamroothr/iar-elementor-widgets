@@ -135,7 +135,13 @@ class ImageGridWidget extends Widget_Base {
             'default' => __( 'Open', 'iar-elementor-widgets' ),
         ] );
 
-		$this->add_control( 'grid_items', [
+        $this->add_control( 'grid_items_notice', [
+            'type'            => Controls_Manager::RAW_HTML,
+            'raw'             => __( 'Maximum of 4 grid items will be displayed.', 'iar-elementor-widgets' ),
+            'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+        ] );
+
+        $this->add_control( 'grid_items', [
             'label'       => __( 'Grid Items', 'iar-elementor-widgets' ),
             'type'        => Controls_Manager::REPEATER,
             'fields'      => $repeater->get_controls(),
@@ -226,9 +232,15 @@ class ImageGridWidget extends Widget_Base {
 	}
 
 	protected function render(): void {
-		$settings = $this->get_settings_for_display();
-		$items    = $settings['grid_items'];
-		$count    = count( $items );
+        $settings = $this->get_settings_for_display();
+        $items    = $settings['grid_items'];
+
+        // Limit items to a maximum of 4. Elementor repeaters don't provide a
+        // native `max_items` option, so enforce it server-side by slicing the
+        // array before rendering the view.
+        $items = is_array( $items ) ? array_slice( $items, 0, 4 ) : [];
+
+        $count    = count( $items );
 
 		if ( $count === 0 ) {
 			return;

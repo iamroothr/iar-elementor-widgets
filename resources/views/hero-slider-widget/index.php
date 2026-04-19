@@ -7,6 +7,34 @@
  */
 
 $slides    = $settings['slides'];
+
+// Dynamic slide order: rotate first N slides on each frontend page load.
+$dynamic_order = ( $settings['dynamic_slide_order'] ?? '' ) === 'yes';
+if ( $dynamic_order && ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
+    $rotate_count = max( 2, (int) ( $settings['dynamic_slide_count'] ?? 2 ) );
+    $rotate_count = min( $rotate_count, count( $slides ) );
+
+    if ( $rotate_count > 1 ) {
+        $option_key = 'iar_hero_slider_rotation_' . sanitize_key( $widget_id );
+        $offset     = (int) get_option( $option_key, 0 );
+
+        // Split into rotating and static portions.
+        $rotating = array_slice( $slides, 0, $rotate_count );
+        $static   = array_slice( $slides, $rotate_count );
+
+        // Apply circular offset.
+        $offset_mod = $offset % $rotate_count;
+        $rotating   = array_merge(
+            array_slice( $rotating, $offset_mod ),
+            array_slice( $rotating, 0, $offset_mod )
+        );
+
+        $slides = array_merge( $rotating, $static );
+
+        // Increment for next page load. Keep stored value small using modulo.
+        update_option( $option_key, ( $offset + 1 ) % $rotate_count, false );
+    }
+}
 $effect    = $settings['effect'] ?? 'slide';
 $loop      = ( $settings['loop'] ?? '' ) === 'yes';
 $autoplay  = ( $settings['autoplay'] ?? '' ) === 'yes';

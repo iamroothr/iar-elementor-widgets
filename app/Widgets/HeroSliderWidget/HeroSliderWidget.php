@@ -240,8 +240,28 @@ class HeroSliderWidget extends Widget_Base {
 			'default'      => 'yes',
 		] );
 
-        // Show dots control removed — dot navigation is no longer supported.
+		$this->add_control( 'dynamic_slide_order', [
+			'label'        => __( 'Dynamic Slide Order', 'iar-elementor-widgets' ),
+			'description'  => __( 'Rotate the order of the first N slides on each page load.', 'iar-elementor-widgets' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'iar-elementor-widgets' ),
+			'label_off'    => __( 'No', 'iar-elementor-widgets' ),
+			'return_value' => 'yes',
+			'default'      => '',
+			'separator'    => 'before',
+		] );
 
+		$this->add_control( 'dynamic_slide_count', [
+			'label'       => __( 'Slides Included', 'iar-elementor-widgets' ),
+			'description' => __( 'Number of first slides to rotate.', 'iar-elementor-widgets' ),
+			'type'        => Controls_Manager::NUMBER,
+			'min'         => 2,
+			'max'         => 10,
+			'default'     => 2,
+			'condition'   => [ 'dynamic_slide_order' => 'yes' ],
+		] );
+
+		// Show dots control removed — dot navigation is no longer supported.
 		$this->end_controls_section();
 
 		// --- Style Section ---
